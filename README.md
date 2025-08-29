@@ -22,8 +22,8 @@ Sistema completo de web scraping para o Mercado Livre com interface web moderna 
 
 1. **Clone o repositório**
 ```bash
-git clone <url-do-repositorio>
-cd web_scrapping_mercado_livre
+git clone https://github.com/Dom-Henrique3/Web-Scrap-amazon-mercado_livre.git
+cd Web-Scrap-amazon-mercado_livre
 ```
 
 2. **Crie um ambiente virtual**
@@ -75,7 +75,7 @@ python agendador.py
 ## 📁 Estrutura do Projeto
 
 ```
-web_scrapping_mercado_livre/
+Web-Scrap-amazon-mercado_livre/
 ├── app.py                 # Aplicação Flask principal
 ├── api.py                 # API REST
 ├── agendador.py           # Sistema de agendamento
