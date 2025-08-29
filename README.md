@@ -47,12 +47,29 @@ tar -xzf geckodriver-v0.36.0-linux64.tar.gz
 sudo mv geckodriver /usr/local/bin/
 ```
 
-5. **Configure o Supabase (opcional)**
+5. **Configure as variáveis de ambiente**
 ```bash
-# Crie um arquivo .env com suas credenciais
-echo "SUPABASE_URL=sua_url_do_supabase" > .env
-echo "SUPABASE_KEY=sua_chave_do_supabase" >> .env
+# Copie o arquivo de exemplo
+cp .env.example .env
+
+# Edite o arquivo .env com suas credenciais
+nano .env
 ```
+
+### Configurações Necessárias:
+
+**Para Supabase (opcional):**
+- `SUPABASE_URL`: URL do seu projeto Supabase
+- `SUPABASE_KEY`: Chave de API do Supabase
+
+**Para SerpAPI (Amazon scraping):**
+- `SERPAPI_KEY`: Chave de API do SerpAPI (obrigatória para Amazon)
+
+**Para obter a chave do SerpAPI:**
+1. Acesse [serpapi.com](https://serpapi.com)
+2. Crie uma conta gratuita
+3. Obtenha sua chave de API
+4. Adicione no arquivo `.env`
 
 ## 🚀 Como Usar
 
@@ -97,12 +114,31 @@ Web-Scrap-amazon-mercado_livre/
 ## 🔧 Configuração
 
 ### Variáveis de Ambiente
-Crie um arquivo `.env` na raiz do projeto:
+O projeto usa um arquivo `.env` para configurações. Copie o arquivo de exemplo:
 
+```bash
+cp .env.example .env
+```
+
+**Configurações obrigatórias:**
 ```env
+# SerpAPI (obrigatório para Amazon)
+SERPAPI_KEY=sua_chave_do_serpapi
+
+# Flask
+FLASK_ENV=development
+FLASK_SECRET_KEY=sua_chave_secreta_do_flask
+```
+
+**Configurações opcionais:**
+```env
+# Supabase (banco de dados)
 SUPABASE_URL=sua_url_do_supabase
 SUPABASE_KEY=sua_chave_do_supabase
-FLASK_ENV=development
+
+# Configurações avançadas
+REQUEST_DELAY=2
+MAX_REQUESTS_PER_MINUTE=30
 ```
 
 ### Configuração do Scraping
@@ -111,6 +147,19 @@ O sistema suporta configurações personalizadas para:
 - Filtros de preço
 - Categorias específicas
 - Intervalos de execução
+
+### APIs Utilizadas
+
+**SerpAPI (Amazon):**
+- Utilizada para scraping da Amazon
+- Requer chave de API gratuita
+- Limite de 100 consultas/mês no plano gratuito
+- [Obter chave gratuita](https://serpapi.com)
+
+**Selenium (Mercado Livre):**
+- Utilizada para scraping do Mercado Livre
+- Não requer chave de API
+- Requer Firefox e GeckoDriver
 
 ## 📊 Dados Extraídos
 
@@ -168,10 +217,24 @@ which geckodriver
 cat .env
 ```
 
+3. **Erro de SerpAPI**
+```bash
+# Verifique se a chave está configurada
+echo $SERPAPI_KEY
+
+# Verifique se a chave está no arquivo .env
+grep SERPAPI_KEY .env
+```
+
 3. **Imagens não carregando**
 - O sistema implementa lazy loading para imagens
 - Verifique a conexão com a internet
 - Algumas imagens podem estar temporariamente indisponíveis
+
+4. **Erro de SerpAPI**
+- Verifique se a chave está configurada no arquivo `.env`
+- Confirme se a chave é válida em [serpapi.com](https://serpapi.com)
+- Verifique se não excedeu o limite de consultas gratuitas (100/mês)
 
 ### Logs
 Os logs são salvos em:
